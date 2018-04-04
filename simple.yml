@@ -1,0 +1,19 @@
+---
+- name: Installing VSFTPD
+  hosts: webserver
+  user: ansible
+  become: yes
+  become_method: sudo
+  become_user: root
+  tasks:
+  - name: install sftpd
+    apt: name=vsftpd
+  - name: enable vsftpd
+    service: name=vsftpd enabled=true
+  - name: create readme file
+    copy:
+      content: "welcometo ftp server"
+      dest: /var/tmp/README
+      force: no
+      mode: 044
+...
